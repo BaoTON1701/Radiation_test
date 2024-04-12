@@ -1,0 +1,53 @@
+noise : SDFTOASC input.dat output.txt /y:LR /x
+Gain SDFTOASC 300KGB2.DAT 300KGB23.TXT /x /T:D
+info : SDFTOASC 300KGB2.DAT /i
+
+
+
+SDFTOASC <sfile> [dfile] [/U] [/O] [/I] [/A] [/X] [/T:<c1>,<c2>] [/Y:<units>]
+	[/M:<dBmRef>] [/G:<dBRef>] [/P:<pnts>] [/D:<data>]
+	[/R:<row>[-<rowEnd>][,C]] [/C:<col>] [/S:<scan>[-<scanEnd>][,C]]
+	[/L] [/F:<format>] [/B:<string>]
+
+  <sfile>      Input SDF file
+  [dfile]      Output ASCII file (optional)
+  /U           Show this usage
+  /O           Overwrite [dfile] if it exists
+  /I           Info only on <sfile> (i.e. measurement results available)
+  /A           All frequency lines
+  /X           Include X data in the file
+  /T:<c1>,<c2> Y coordinates, <c1> or <c2> may be 1 of the following:
+                   B=dBm, D=dB, S=dB signed, M=Mag, R=Real, I=Imag
+                   P=Phase, U=Unwrap phase
+                   Default is R,I for complex data, R for real data
+  /Y:<units>   Y units, one or more of the following:
+                   L=Linear, P=Power, D=Density, R=RMS, A=Radians
+  /M:<dBmRef>  dBm impedance reference.  Default is use input impedance
+               from data file if < 1 MOhm (else use 50 Ohm).
+  /G:<dBRef>   Magnitude value used as a reference for dB type of coord.
+               If /G with no parameter, then default is 20E-6 (dBSPL).
+  /P:<points>  Number of points per line (default is 1)
+  /D:<data>    Select data for the specified SDF_DATA_HDR (default is 0)
+  /R:<row>[-<rowEnd>][,C] Select data for the specified row range
+               (default is 0). If 'C' is specified, then the row data
+               will be arranged as one row per column.
+  /C:<col>     Select data for the specified column (default is 0)
+  /S:<scan>[-<scanEnd>][,C] Select data for the specified scan range
+               (default is 0). If 'C' is specified, then the scan data
+               will be arranged as one scan per column.
+  /L           Orient the output data in lines instead of columns
+  /F:<format>  C printf format string (default is "%14.6le")
+  /B:<string>  Field separator string (default is " ")
+
+Convert the source file to the destination file.  The result is placed
+in the destination file (if entered) otherwise the result will be sent
+to the screen.
+
+The C format string of "%14.6le" specifies a double (long float) with
+a width of 14 columns and a precision of 6 in exponential format.  Other
+formats are:
+	%lf - regular floating point format
+	%le - exponential floating point format (also %lE)
+	%lg - regular or exponential, whichever is shorter (also %lG)
+
+B.02.01, Copyright (c) 1991-1994 Hewlett-Packard Company. All Rights Reserved.
